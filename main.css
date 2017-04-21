@@ -1,0 +1,190 @@
+* {
+    box-sizing: border-box;
+    
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EAF9FB;
+    font-family: "Roboto",sans-serif;
+}
+
+button {
+    position: absolute;
+    top: 0;
+}
+
+.app__nav-bar,
+.app__primary-section,
+.app__secondary-section,
+.app__forecast-section{
+    width: 100%;
+    text-align: left;
+    padding-left: 5%;
+    padding-right: 4%;
+    margin: 6% auto;
+}
+
+.none-display {
+    display: none;
+}
+
+
+/**************************app***************************/
+.app {
+    width: 95%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 6px;
+    background-color: rgb(134,153,188);
+}
+
+/**********************app__nav-bar***********************/
+.app__nav-bar {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    font-size: 0.8em;
+    letter-spacing: .8px; ;
+    background-color: transparent;
+    border: 2px dashed red;
+    color: white;
+}
+
+.nav-bar__logo{
+    line-height: 2;
+}
+
+.nav-bar__btns {
+    width: 65%;
+    display: flex;
+    justify-content: space-between;/*
+    border: 1px dashed yellow;*/
+}
+
+.nav-bar__search-btn {
+    width: 80%;
+    height: 100%;
+    padding-left: 65%;
+    display: flex; 
+    position: relative;
+    transition: all 5s ease;
+    overflow: hidden;/*
+    border: 1px dashed black;*/
+}
+
+.nav-bar__search-btn .mdl-textfield{
+    margin-top: -20px;
+}
+
+
+
+.nav-bar__close-btn {
+    position: absolute;
+    right: 6px;
+    cursor: pointer;
+}
+
+.nav-bar__close-btn img{
+    width: 23px;
+    
+}
+
+@keyframes slideLeft {
+    from {
+        padding-left: 65%;
+    }
+    to {
+        padding-left: 0%;
+    }
+}
+
+@keyframes slideBack {
+    from {
+        padding-left: 0%;
+    }
+    to {
+        padding-left: 65%;
+    }
+}
+
+
+.nav-bar__switch-btn {
+    cursor: pointer;
+}
+
+
+.greenBackground {
+    background-color: #4ec7d2;
+}
+
+
+/**********************app__primary-section****************/
+.app__primary-section{
+    margin-top: 23%;
+    border: 2px dashed blue;
+    padding-top: 0;
+}
+
+.app__primary-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px dashed red;
+}
+
+.app__city-and-country {
+    width: 50%;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+.app__city {
+    font-size: 1.5em;
+    color: white;
+    margin-bottom: 1.4%;
+}
+
+.app__country {
+    color: rgb(200,209,224);
+}
+
+.app__degree {
+    width: 37%;
+    line-height: 1;
+    font-size: 4em;
+    overflow: hidden;
+    text-align: right;
+    color: white;
+}
+
+/**********************app__secondary-section***************/
+.app__secondary-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 2px dashed blue;
+    color: white;
+}
+
+.app__wind-speed{
+    margin-bottom: 1%;
+}
+
+/**********************app__forecast-section*****************/
+.app__forecast-section{
+    width: 100%;
+    margin-top: 12%;
+    border: 2px dashed black;
+}
+

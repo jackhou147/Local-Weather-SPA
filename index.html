@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="normalize.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+    <body>
+        <button type="button" class="api-btn">
+            click me to send API request
+        </button>
+        
+        
+        
+        <!----------------------app-------------------------->
+        <div class="app mdl-card mdl-shadow--4dp">
+            <div class="app__nav-bar nav-bar">
+                <div class="nav-bar__logo">WEADIFY</div>
+                <div class="nav-bar__btns">
+                    <div class="nav-bar__search-btn">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                        <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
+                          <i class="material-icons">search</i>
+                        </label>
+                        <div class="mdl-textfield__expandable-holder">
+                          <input class="mdl-textfield__input" type="text" id="sample6">
+                          <label class="mdl-textfield__label" for="sample-expandable">zip code</label>
+                        </div>
+                      </div>
+                        <div class="nav-bar__close-btn none-display">
+                            <img src="1492680616_Close.svg">
+                        </div>
+                    </div><!--
+                    <div class="nav-bar__switch-btn">
+                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2">
+                          <input type="checkbox" id="switch-2" class="mdl-switch__input">
+                          <span class="mdl-switch__label"></span>
+                        </label>
+                    </div>-->
+                    <div class="nav-bar__switch-btn">
+                        <i class="material-icons">brightness_4</i>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="app__primary-section">
+                <div class="app__weather-icon">
+                    <img>
+                </div>
+                <div class="app__primary-info">
+                    <div class="app__city-and-country">
+                        <div class="app__city">
+                            <div id="city">
+                            </div>
+                        </div>
+                        <div class="app__country">
+                            <div id="country"> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app__degree"></div>
+                </div>
+            </div>
+            <div class="app__secondary-section">
+                <div class="app__wind-speed">
+                    <div id="windSp">
+                        Wind speed:
+                    </div>
+                </div>
+                <div class="app__humidity">
+                    <div id="humid">
+                        Humidity:
+                    </div>
+                </div>
+            </div>
+            <div class="app__forecast-section">
+                <div>forecast</div>
+            </div>
+        </div>
+        <!----------------------/app-------------------------->
+        
+        
+        
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
