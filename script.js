@@ -1,5 +1,162 @@
 $(document).ready(function(){
     var $apiBtn = $(".api-btn");
+    function kelvinToCelsius(num){
+        var celcius = num - 273.15;
+        return Math.round(celcius)+"°";
+    }
+    
+    function getWeatherIcon(obj){
+        function getWeatherGroup(str){
+            var _11d = [
+                "thunderstorm with light rain",
+                "thunderstorm with rain",
+                "thunderstorm with heavy rain",
+                "light thunderstorm",
+                "thunderstorm",
+                "heavy thunderstorm",
+                "ragged thunderstorm",
+                "thunderstorm with light drizzle",
+                "thunderstorm with drizzle",
+                "thunderstorm with heavy drizzle"
+            ];
+            var _09d = [
+                "light intensity drizzle",
+                "drizzle",
+                "heavy intensity drizzle",
+                "light intensity drizzle rain",
+                "drizzle rain",
+                "heavy intensity drizzle rain",
+                "shower rain and drizzle",
+                "heavy shower rain and drizzle",
+                "shower drizzle",
+                "light intensity shower rain",
+                "shower rain",
+                "heavy intensity shower rain",
+                "ragged shower rain"
+            ];
+            var _10d = [
+                "light rain",
+                "moderate rain",
+                "heavy intensity rain",
+                "very heavy rain",
+                "extreme rain"
+            ];
+            var _13d = [
+                "freezing rain",
+                "light snow",
+                "snow",
+                "heavy snow",
+                "sleet",
+                "shower sleet",
+                "light rain and snow",
+                "rain and snow",
+                "light shower snow",
+                "shower snow",
+                "heavy shower snow"
+            ];
+            var _50d = [
+                "mist",
+                "smoke",
+                "haze",
+                "sand, dust whirls",
+                "fog",
+                "sand",
+                "dust",
+                "volcanic ash",
+                "squalls",
+                "tornado"
+            ];
+            var _01d = [
+                "clear sky"
+            ];
+            var _02d = [
+                "few clouds"
+            ];
+            var _03d = [
+                "scattered clouds"
+            ];
+            var _04d = [
+                "broken clouds",
+                "overcast clouds"
+            ];
+            var group;
+            _11d.forEach(function(string){
+                if(str == string){
+                    group = "_11d";
+                }
+            });
+            _09d.forEach(function(string){
+                if(str == string){
+                    group = "_09d";
+                }
+            });
+            _10d.forEach(function(string){
+                if(str == string){
+                    group = "_10d";
+                }
+            });
+            _13d.forEach(function(string){
+                if(str == string){
+                    group = "_13d";
+                }
+            });
+            _50d.forEach(function(string){
+                if(str == string){
+                    group = "_50d";
+                }
+            });
+            _01d.forEach(function(string){
+                if(str == string){
+                    group = "_01d";
+                }
+            });
+            _02d.forEach(function(string){
+                if(str == string){
+                    group = "_02d";
+                }
+            });
+            _03d.forEach(function(string){
+                if(str == string){
+                    group = "_03d";
+                }
+            });
+            _04d.forEach(function(string){
+                if(str == string){
+                    group = "_04d";
+                }
+            });
+            return group;
+        }
+        switch (getWeatherGroup(obj.description)) {
+            case "_04d":
+                return "http://openweathermap.org/img/w/04d.png";
+                break;
+            case "_01d":
+                return "http://openweathermap.org/img/w/01d.png";
+                break;
+            case "_02d":
+                return "http://openweathermap.org/img/w/02d.png";
+                break;
+            case "_03d":
+                return "http://openweathermap.org/img/w/03d.png";
+                break;
+            case "_09d":
+                return "http://openweathermap.org/img/w/09d.png";
+                break;
+            case "_10d":
+                return "http://openweathermap.org/img/w/10d.png";
+                break;
+            case "_11d":
+                return "http://openweathermap.org/img/w/11d.png";
+                break;
+            case "_13d":
+                return "http://openweathermap.org/img/w/13d.png";
+                break;
+            case "_50d":
+                return "http://openweathermap.org/img/w/50d.png";
+                break;
+        }
+    };
     function myFunction(){
     if(navigator.geolocation){
         var latitude;
@@ -31,7 +188,7 @@ $(document).ready(function(){
              url : "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=5163ab06e9f52f12b5b002d0dac27f47",
              dataType : "jsonp",
              success: function(json){
-                 console.log(json);
+                 /*console.log(json);*/
                  tempK = Math.floor(json.main.temp);
                  tempC = Math.floor(tempK -273.15);
                  tempF = Math.floor(tempK -459.67)+"°F";
@@ -59,33 +216,43 @@ $(document).ready(function(){
                  windDeg = json.wind.deg;
                  console.log("Wind degree: "+windDeg);
                  $("#windDeg").append(windDeg);
-                 if(json.weather[0].description == "broken clouds"){
-                     $weatherIcon.attr("src", "http://openweathermap.org/img/w/04d.png");
-                 }else if(json.weather[0].description == "clear sky"){
-                     $weatherIcon.attr("src", "http://openweathermap.org/img/w/01d.png");
-                 }else if(json.weather[0].description == "few clouds"){
-                     $weatherIcon.attr("src", "http://openweathermap.org/img/w/02d.png");
-                 }else if(json.weather[0].description == "scattered clouds"){
-                     $weatherIcon.attr("src", "http://openweathermap.org/img/w/03d.png");
-                 }else if(json.weather[0].description == "shower rain"){
-                     $weatherIcon.attr("src", "http://openweathermap.org/img/w/09d.png");
-                 }else if(json.weather[0].description == "rain"){
-                     $weatherIcon.attr("src", "http://openweathermap.org/img/w/10d.png");
-                 }else if(json.weather[0].description == "thunderstorm"){
-                     $weatherIcon.attr("src", "http://openweathermap.org/img/w/11d.png");
-                 }else if(json.weather[0].description == "snow"){
-                     $weatherIcon.attr("src", "http://openweathermap.org/img/w/13d.png");
-                 }else if(json.weather[0].description == "mist"){
-                     $weatherIcon.attr("src", "http://openweathermap.org/img/w/50d.png");
-                 }
-
+                 $weatherIcon.attr("src", getWeatherIcon(json.weather[0]));
              }
             });
             $.ajax({
-                url : /*"http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=5163ab06e9f52f12b5b002d0dac27f47",*/ "http://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+longitude+"&appid=5163ab06e9f52f12b5b002d0dac27f47",
+                url :
+                    "http://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+longitude+"&appid=5163ab06e9f52f12b5b002d0dac27f47",
                 dataType : "jsonp",
                 success: function(json){
                     console.log(json);
+                    for(var i=0; i<38; i++){
+                        var j = i.toString();
+                        var date_time = json.list[j].dt_txt;//string
+                        var weatherIcon = getWeatherIcon(json.list[j].weather["0"]);//string
+                        var deg = kelvinToCelsius(json.list[j].main.temp);//number
+                        var append = 
+                            "<div class='forecast-section__forecast'>"+
+                            
+                                "<div class='forecast-section__date-and-text'> "+
+                                    date_time+
+                                "</div>"+
+                            
+                                "<div class='forecast-section__icon-and-deg'> "+
+                            
+                                    "<div class='forecast-section__icon'>"+
+                                        "<img src="+weatherIcon+">"+
+                                    "</div>"+
+                            
+                                    "<div class='forecast-section__deg'>"+
+                                        deg+
+                                    "</div>"+
+                            
+                                "</div>"+
+                                    
+                            "</div>";
+                        $(".forecast-section").append(append);
+                        
+                    }
                 }
             });
         })
@@ -101,13 +268,14 @@ $(document).ready(function(){
     $searchIcon.click(function(){
         $searchBtn.css("animation","slideLeft 0.2s ease forwards");
         $closeBtn.removeClass("none-display");
-    })
+    });
     $closeBtn.click(function(){
         $searchBtn.css("animation","slideBack 0.2s ease forwards");
         $(this).addClass("none-display");
-    })
+    });
     var $colorSwitchBtn = $(".nav-bar__switch-btn");
     $colorSwitchBtn.click(function(){
         $(".app").toggleClass("greenBackground");
-    })
+    });
+    
 })
