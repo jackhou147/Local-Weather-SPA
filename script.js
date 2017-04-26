@@ -3,8 +3,7 @@ $(document).ready(function(){
     function kelvinToCelsius(num){
         var celcius = num - 273.15;
         return Math.round(celcius)+"°";
-    }
-    
+    };
     function getWeatherIcon(obj){
         function getWeatherGroup(str){
             var _11d = [
@@ -177,18 +176,20 @@ $(document).ready(function(){
         var $deg = $(".app__degree");
         var $winSp = $(".app__wind-speed");
         var $humid = $(".app__humidity");
-        var $weatherIcon = $(".app__weather-icon img");
-        navigator.geolocation.getCurrentPosition(function showPosition(position){
+        var $weatherIcon = $(".app__weather-icon");
+        function success(position){
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
             $("#lat").append(latitude);
             $("#lon").append(longitude);
+            alert("lat")
             //start ajax request
             $.ajax({
-             url : "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=5163ab06e9f52f12b5b002d0dac27f47",
+             url : /*"http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=5163ab06e9f52f12b5b002d0dac27f47"*/
+                   "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=171fbe7e29d7d4cff5088e5cd6cddfd9",
              dataType : "jsonp",
              success: function(json){
-                 /*console.log(json);*/
+                 console.log(json);
                  tempK = Math.floor(json.main.temp);
                  tempC = Math.floor(tempK -273.15);
                  tempF = Math.floor(tempK -459.67)+"°F";
@@ -216,18 +217,18 @@ $(document).ready(function(){
                  windDeg = json.wind.deg;
                  console.log("Wind degree: "+windDeg);
                  $("#windDeg").append(windDeg);
-                 $weatherIcon.attr("src", getWeatherIcon(json.weather[0]));
+                 $weatherIcon.attr("src", getWeatherIcon(json.weather["0"]));
              }
             });
             $.ajax({
                 url :
-                    "http://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+longitude+"&appid=5163ab06e9f52f12b5b002d0dac27f47",
+                    "http://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+longitude+"&appid=171fbe7e29d7d4cff5088e5cd6cddfd9",
                 dataType : "jsonp",
                 success: function(json){
                     console.log(json);
-                    for(var i=0; i<38; i++){
+                    for(var i=0; i<7; i++){
                         var j = i.toString();
-                        var date_time = json.list[j].dt_txt;//string
+                        var date_time = json.list[j].dt_txt.replace(":00:00",":00");//string
                         var weatherIcon = getWeatherIcon(json.list[j].weather["0"]);//string
                         var deg = kelvinToCelsius(json.list[j].main.temp);//number
                         var append = 
@@ -255,7 +256,11 @@ $(document).ready(function(){
                     }
                 }
             });
-        })
+        };
+        function error(){
+            alert("error");
+        }
+        navigator.geolocation.getCurrentPosition(success,error);
 }
 };
     $apiBtn.click(myFunction);
