@@ -56,32 +56,42 @@
             <div class="app__primary-section">
                 <div class="app__weather-icon-and-unit-switch">
                     <div class="app__unit-switch unit-switch">
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect celcius" for="option-1">
                           <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
-                          <span class="mdl-radio__label">First</span>
+                          <span class="mdl-radio__label">°C</span>
                         </label>
 
 
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect fahr" for="option-2">
                           <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
-                          <span class="mdl-radio__label">Second</span>
+                          <span class="mdl-radio__label">°F</span>
                         </label>
 
                     </div>
+                    <div class="app__weather-description"></div>
                     <img class="app__weather-icon">
                 </div>
                 <div class="app__primary-info">
-                    <div class="app__city-and-country">
-                        <div class="app__city">
-                            <div id="city">
-                            </div>
+                    <div class="app__address">
+                        <div class="app__city-and-country">
+                            <div id="city"></div>
+                            <span>, </span>
+                            <div id="state"></div>
                         </div>
-                        <div class="app__country">
-                            <div id="country"> 
-                            </div>
+                        <div>
+                            <div id="country"></div>
+                            <span>, </span>
+                            <div id="zipcode"></div>
+                        </div>
+                        <div>
+                            <div id="day"></div>
+                            <div id="time"></div>
                         </div>
                     </div>
-                    <div class="app__degree"></div>
+                    <div class="app__degree degree">
+                        <span class="degree-number"></span>
+                        <span class="degree-unit"></span>
+                    </div>
                 </div>
             </div>
             <div class="app__secondary-section">

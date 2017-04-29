@@ -2,8 +2,13 @@ $(document).ready(function(){
     var $apiBtn = $(".api-btn");
     function kelvinToCelsius(num){
         var celcius = num - 273.15;
-        return Math.round(celcius)+"°";
+        return Math.round(celcius)+"°C";
     };
+    
+    function celciusToFahr(num){
+        var fahr = num + 32;
+        return fahr + "°F";
+    }
     function getWeatherIcon(obj){
         function getWeatherGroup(str){
             var _11d = [
@@ -164,7 +169,9 @@ $(document).ready(function(){
         var tempC;
         var tempF;
         var city;
+        var state;
         var country;
+        var zip;
         var windSp;
         var weatherDesc;
         var humid;
@@ -173,15 +180,32 @@ $(document).ready(function(){
         var windDeg;
         var $city = $(".app__city");
         var $country = $(".app__country");
-        var $deg = $(".app__degree");
+        var $degNum = $(".degree-number");
+        var $degUnit  = $(".degree-unit");
         var $winSp = $(".app__wind-speed");
         var $humid = $(".app__humidity");
         var $weatherIcon = $(".app__weather-icon");
+        $.ajax({
+                url: "http://ip-api.com/json",
+                dataType: "jsonp",
+                success: function(json) {
+                    latitude = json.lat;
+                    longitude = json.lon;
+                    state = json.region;
+                    country = json.country;
+                    zip = json.zip;
+                    $("#country").html(country);
+                    $("#state").html(state);
+                    $("#zipcode").html(zip);
+                    console.log(json);
+                }
+            });
         function success(position){
+            console.log("timestamp: "+position.timestamp.toLocaleString());
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
-            $("#lat").append(latitude);
-            $("#lon").append(longitude);
+            console.log("lat:" +latitude);
+            console.log("long: "+longitude);
             alert("lat")
             //start ajax request
             $.ajax({
@@ -191,31 +215,34 @@ $(document).ready(function(){
              success: function(json){
                  console.log(json);
                  tempK = Math.floor(json.main.temp);
-                 tempC = Math.floor(tempK -273.15);
-                 tempF = Math.floor(tempK -459.67)+"°F";
+                 tempC = Math.floor(tempK -273.15)+"°";
+                 tempF = Math.floor(tempK -459.67)+"°";
                  city = json.name;
                  $("#city").append(city);
-                 country = json.sys.country;
-                 console.log("country: "+country);
-                 $("#country").append(country);
                  windSp = json.wind.speed;
                  console.log("wind speed: "+windSp);
                  $("#windSp").append(windSp);
                  weatherDesc = json.weather[0].description;
-                 $("#weatherDesc").append(weatherDesc);
+                 /*$("#weatherDesc").append(weatherDesc);*/
+                 $(".app__weather-description").html(weatherDesc);
                  humid = json.main.humidity;
                  console.log("humidity: "+humid);
                  $("#humid").append(humid);
-                 tempOut = tempC;
                  console.log("temperature: "+tempOut);
                  /*$deg.append(tempOut + "°");*/
-                 $deg.append("<span style='font-weight: 100'>"+tempOut+"°"+"</span>")
-                 $("#switch").append(tempF)
-                 $("#toggleWeather").click(function toggleWeather(){
-                   $("span").toggle();
-                });
+                 $degNum.html(tempC);
+                 $degUnit.html("C");
+                 var $celcius = $(".celcius");
+                    var $fahr = $(".fahr");
+                    $celcius.click(function(){
+                        $degNum.html(tempC);
+                        $degUnit.html("C");
+                    });
+                    $fahr.click(function(){
+                        $degNum.html(tempF);
+                        $degUnit.html("F");
+                    });
                  windDeg = json.wind.deg;
-                 console.log("Wind degree: "+windDeg);
                  $("#windDeg").append(windDeg);
                  $weatherIcon.attr("src", getWeatherIcon(json.weather["0"]));
              }
@@ -232,7 +259,7 @@ $(document).ready(function(){
                         var weatherIcon = getWeatherIcon(json.list[j].weather["0"]);//string
                         var deg = kelvinToCelsius(json.list[j].main.temp);//number
                         var append = 
-                            "<div class='forecast-section__forecast'>"+
+                            "<div class='forecast-section__forecast lightPurple'>"+
                             
                                 "<div class='forecast-section__date-and-text'> "+
                                     date_time+
@@ -259,6 +286,90 @@ $(document).ready(function(){
         };
         function error(){
             alert("error");
+            $.ajax({
+                url: "http://ip-api.com/json",
+                dataType: "jsonp",
+                success: function(json) {
+                    var latitude = json.lat;
+                    var longitude = json.lon;
+                    $.ajax({
+             url : /*"http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=5163ab06e9f52f12b5b002d0dac27f47"*/
+                   "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=171fbe7e29d7d4cff5088e5cd6cddfd9",
+             dataType : "jsonp",
+             success: function(json){
+                 console.log(json);
+                 tempK = Math.floor(json.main.temp);
+                 tempC = Math.floor(tempK -273.15)+"°";
+                 tempF = Math.floor(tempK -459.67)+"°";
+                 city = json.name;
+                 $("#city").append(city);
+                 windSp = json.wind.speed;
+                 console.log("wind speed: "+windSp);
+                 $("#windSp").append(windSp);
+                 weatherDesc = json.weather[0].description;
+                 /*$("#weatherDesc").append(weatherDesc);*/
+                 $(".app__weather-description").html(weatherDesc);
+                 humid = json.main.humidity;
+                 console.log("humidity: "+humid);
+                 $("#humid").append(humid);
+                 console.log("temperature: "+tempOut);
+                 /*$deg.append(tempOut + "°");*/
+                 $degNum.html(tempC);
+                 $degUnit.html("C");
+                 var $celcius = $(".celcius");
+                    var $fahr = $(".fahr");
+                    $celcius.click(function(){
+                        $degNum.html(tempC);
+                        $degUnit.html("C");
+                    });
+                    $fahr.click(function(){
+                        $degNum.html(tempF);
+                        $degUnit.html("F");
+                    });
+                 windDeg = json.wind.deg;
+                 $("#windDeg").append(windDeg);
+                 $weatherIcon.attr("src", getWeatherIcon(json.weather["0"]));
+             }
+            });
+                    $.ajax({
+                url :
+                    "http://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+longitude+"&appid=171fbe7e29d7d4cff5088e5cd6cddfd9",
+                dataType : "jsonp",
+                success: function(json){
+                    console.log(json);
+                    for(var i=0; i<7; i++){
+                        var j = i.toString();
+                        var date_time = json.list[j].dt_txt.replace(":00:00",":00");//string
+                        var weatherIcon = getWeatherIcon(json.list[j].weather["0"]);//string
+                        var deg = kelvinToCelsius(json.list[j].main.temp);//number
+                        var append = 
+                            "<div class='forecast-section__forecast lightPurple'>"+
+                            
+                                "<div class='forecast-section__date-and-text'> "+
+                                    date_time+
+                                "</div>"+
+                            
+                                "<div class='forecast-section__icon-and-deg'> "+
+                            
+                                    "<div class='forecast-section__icon'>"+
+                                        "<img src="+weatherIcon+">"+
+                                    "</div>"+
+                            
+                                    "<div class='forecast-section__deg'>"+
+                                        deg+
+                                    "</div>"+
+                            
+                                "</div>"+
+                                    
+                            "</div>";
+                        $(".forecast-section").append(append);
+                        
+                    }
+                }
+            });
+                }
+            })
+            
         }
         navigator.geolocation.getCurrentPosition(success,error);
 }
@@ -281,6 +392,17 @@ $(document).ready(function(){
     var $colorSwitchBtn = $(".nav-bar__switch-btn");
     $colorSwitchBtn.click(function(){
         $(".app").toggleClass("greenBackground");
+        if($(".forecast-section__forecast").hasClass("lightPurple")){
+            $(".forecast-section__forecast").removeClass("lightPurple");
+            $(".forecast-section__forecast").addClass("lightGreen");
+        }
+        else{
+            $(".forecast-section__forecast").addClass("lightPurple");
+            $(".forecast-section__forecast").removeClass("lightGreen");
+        };
     });
+    
+    /**********************unit-switch***********************/
+    
     
 })
