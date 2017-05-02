@@ -161,7 +161,7 @@ $(document).ready(function(){
                 break;
         }
     };
-    function myFunction(){
+    function sendApiRequest(){
     if(navigator.geolocation){
         var latitude;
         var longitude;
@@ -185,10 +185,19 @@ $(document).ready(function(){
         var $winSp = $(".app__wind-speed");
         var $humid = $(".app__humidity");
         var $weatherIcon = $(".app__weather-icon");
+        var totalApiRequestsSent = 0;
+        function hideLoader(){
+            var $loaderPage = $(".spinner-page");
+            if(totalApiRequestsSent == 3){
+                $loaderPage.fadeOut();
+            }
+        };
         $.ajax({
                 url: "http://ip-api.com/json",
                 dataType: "jsonp",
                 success: function(json) {
+                    totalApiRequestsSent ++;
+                    hideLoader();
                     latitude = json.lat;
                     longitude = json.lon;
                     state = json.region;
@@ -206,13 +215,13 @@ $(document).ready(function(){
             longitude = position.coords.longitude;
             console.log("lat:" +latitude);
             console.log("long: "+longitude);
-            alert("lat")
             //start ajax request
             $.ajax({
-             url : /*"http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=5163ab06e9f52f12b5b002d0dac27f47"*/
-                   "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=171fbe7e29d7d4cff5088e5cd6cddfd9",
+             url : "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=171fbe7e29d7d4cff5088e5cd6cddfd9",
              dataType : "jsonp",
              success: function(json){
+                 totalApiRequestsSent ++;
+                 hideLoader();
                  console.log(json);
                  tempK = Math.floor(json.main.temp);
                  tempC = Math.floor(tempK -273.15)+"°";
@@ -252,6 +261,8 @@ $(document).ready(function(){
                     "http://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+longitude+"&appid=171fbe7e29d7d4cff5088e5cd6cddfd9",
                 dataType : "jsonp",
                 success: function(json){
+                    totalApiRequestsSent ++;
+                    hideLoader();
                     console.log(json);
                     for(var i=0; i<7; i++){
                         var j = i.toString();
@@ -292,7 +303,6 @@ $(document).ready(function(){
             });
         };
         function error(){
-            alert("error");
             $.ajax({
                 url: "http://ip-api.com/json",
                 dataType: "jsonp",
@@ -304,6 +314,8 @@ $(document).ready(function(){
                    "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=171fbe7e29d7d4cff5088e5cd6cddfd9",
              dataType : "jsonp",
              success: function(json){
+                 totalApiRequestsSent ++;
+                 hideLoader();
                  console.log(json);
                  tempK = Math.floor(json.main.temp);
                  tempC = Math.floor(tempK -273.15)+"°";
@@ -343,6 +355,8 @@ $(document).ready(function(){
                     "http://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+longitude+"&appid=171fbe7e29d7d4cff5088e5cd6cddfd9",
                 dataType : "jsonp",
                 success: function(json){
+                    totalApiRequestsSent++;
+                    hideLoader();
                     console.log(json);
                     for(var i=0; i<7; i++){
                         var j = i.toString();
@@ -379,9 +393,9 @@ $(document).ready(function(){
             
         }
         navigator.geolocation.getCurrentPosition(success,error);
-}
+    }
 };
-    $apiBtn.click(myFunction);
+    sendApiRequest();
     
     /**********************app__nav-bar***********************/
     var $switchBtn = $(".nav-bar__switch-btn ");
