@@ -255,14 +255,21 @@ $(document).ready(function(){
                     console.log(json);
                     for(var i=0; i<7; i++){
                         var j = i.toString();
-                        var date_time = json.list[j].dt_txt.replace(":00:00",":00");//string
+                        var date_time = json.list[j].dt_txt.replace(":00:00",":00");
+                        //string
+                        var year = date_time.substring(0,4);
+                        var date = date_time.substring(5,10);
+                        console.log("date: "+date);
+                        var time = date_time.substring(10,16);
                         var weatherIcon = getWeatherIcon(json.list[j].weather["0"]);//string
                         var deg = kelvinToCelsius(json.list[j].main.temp);//number
                         var append = 
                             "<div class='forecast-section__forecast lightPurple'>"+
                             
-                                "<div class='forecast-section__date-and-text'> "+
-                                    date_time+
+                                "<div class='forecast-section__date-and-text'>"+
+                                    "<div>"+year+"</div>"+
+                                    "<div>"+date+"</div>"+
+                                    "<div>"+time+"</div>"+
                                 "</div>"+
                             
                                 "<div class='forecast-section__icon-and-deg'> "+
@@ -377,18 +384,7 @@ $(document).ready(function(){
     $apiBtn.click(myFunction);
     
     /**********************app__nav-bar***********************/
-    var $searchBtn = $(".nav-bar__search-btn");
-    var $searchIcon = $(".nav-bar__search-btn i");
     var $switchBtn = $(".nav-bar__switch-btn ");
-    var $closeBtn = $(".nav-bar__close-btn");
-    $searchIcon.click(function(){
-        $searchBtn.css("animation","slideLeft 0.2s ease forwards");
-        $closeBtn.removeClass("none-display");
-    });
-    $closeBtn.click(function(){
-        $searchBtn.css("animation","slideBack 0.2s ease forwards");
-        $(this).addClass("none-display");
-    });
     var $colorSwitchBtn = $(".nav-bar__switch-btn");
     $colorSwitchBtn.click(function(){
         $(".app").toggleClass("greenBackground");

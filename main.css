@@ -3,10 +3,13 @@
     
 }
 
-body {
+body {      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
     background-color: #EAF9FB;
     font-family: "Roboto",sans-serif;
 }
@@ -44,9 +47,11 @@ button {
 .app {
     width: 95%;
     margin-top: 5%;
-    margin-bottom: 5%;
+    margin-bottom: 5%;      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
     display: flex;
-    flex-direction: column;
+    -ms-flex-direction: column;
+        flex-direction: column;
     position: relative;
     border-radius: 6px;
     background-color: rgb(134,153,188);
@@ -54,15 +59,19 @@ button {
 
 /**********************app__nav-bar***********************/
 .app__nav-bar {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: absolute;
+    width: 100%; 
+    height: 6%;
+    /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+    -ms-flex-direction: row;
+        flex-direction: row;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
     font-size: 0.8em;
     letter-spacing: .8px;
     background-color: transparent;
-    border: 2px dashed red;
+    /*border: 2px dashed red;*/
     color: white;
 }
 
@@ -71,17 +80,20 @@ button {
 }
 
 .nav-bar__btns {
-    width: 65%;
-    display: flex;
-    justify-content: space-between;/*
+    width: 65%;      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+    -ms-flex-pack: justify;
+        justify-content:flex-end ;/*
     border: 1px dashed yellow;*/
 }
 
 .nav-bar__search-btn {
     width: 80%;
     height: 100%;
-    padding-left: 65%;
-    display: flex; 
+    padding-left: 65%;      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
     position: relative;
     transition: all 5s ease;
     overflow: hidden;/*
@@ -144,24 +156,29 @@ button {
 
 /**********************app__primary-section****************/
 .app__primary-section{
-    margin-top: 23%;
-    border: 2px dashed blue;
+    /*border: 2px dashed blue;*/
     padding-top: 0;
 }
 
-.app__primary-info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border: 1px dashed red;
+.app__primary-info {      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+    -ms-flex-direction: row;
+        flex-direction: row;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    /*border: 1px dashed red;*/
 }
 
 .app__address {
     width: 50%;
-    line-height: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    line-height: 1;      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
 }
 
 .app__city-and-country span{
@@ -206,12 +223,15 @@ button {
 }
 
 /**********************app__secondary-section***************/
-.app__secondary-section{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.app__secondary-section{      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
     margin-top: 10%;;
-    border: 2px dashed blue;
+    /*border: 2px dashed blue;*/
     color: white;
 }
 
@@ -224,7 +244,7 @@ button {
     width: 100%;
     margin-top: 25%;
     padding: 0; ;
-    border: 2px dashed black;
+    /*border: 2px dashed black;*/
     color: white;
 }
 
@@ -233,10 +253,13 @@ button {
 }
 
 .forecast-section__forecast{
-    width: 100%; 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    width: 100%;      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+    -ms-flex-direction: row;
+        flex-direction: row;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
     margin-bottom: 3px;
     
     display: none;
@@ -244,15 +267,27 @@ button {
 
 .forecast-section__date-and-text {
     width: 60%;
-    border: 1px dashed red;
+    /*border: 1px dashed red;*/
+     display: -ms-flexbox; 
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.forecast-section__date-and-text div{
+    margin-left: 5px;
 }
 
 .forecast-section__icon-and-deg {
-    width: 36%;
-    display: flex;
-    flex-direction: row;
-    justify-content:space-around;
-    border: 1px dashed green;
+    width: 36%;      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+    -ms-flex-direction: row;
+        flex-direction: row;
+    -ms-flex-pack:distribute;
+        justify-content:space-around;
+    /*border: 1px dashed green;*/
 }
 
 .forecast-section__deg {
@@ -265,19 +300,24 @@ button {
 .forecast-section__forecast:nth-of-type(2),
 .forecast-section__forecast:nth-of-type(3),
 .forecast-section__forecast:nth-of-type(4),
-.forecast-section__forecast:nth-of-type(5) {
-    display: flex;
-    border: 2px dashed green;
+.forecast-section__forecast:nth-of-type(5) {      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+    /*border: 2px dashed green;*/
 }
 
-.forecast-section__date-and-text {
-    display: flex;
-    align-items: center;
+.forecast-section__date-and-text {      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+    -ms-flex-align: center;
+        align-items: center;
 }
 
-.forecast-section__icon-and-deg {
-    display: flex;
-    align-items: center;
+.forecast-section__icon-and-deg {      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+    -ms-flex-align: center;
+        align-items: center;
 }
 
 @media only screen and (min-width: 480px) {
@@ -318,17 +358,20 @@ button {
     /**********************app__primary-section****************/
     .app__primary-section {
         top: 2%;
-        height: 35%;
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
+        height: 35%;      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     }
     
     .app__weather-icon-and-unit-switch {
         width: 35%;
         height: 146%;
         position: relative;
-        border: 1px dashed red;
+        /*border: 1px dashed red;*/
     }
     
     .app__unit-switch,
@@ -347,8 +390,9 @@ button {
     .app__unit-switch {
         width: 100%;
         height: 15%; 
-        border: 1px dashed red;
-        display: flex;
+        /*border: 1px dashed red;*/      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
         bottom: 70%;
         padding: 0 18%;
     }
@@ -362,18 +406,19 @@ button {
         position: absolute;
         bottom: 0;
         left: 20%;
-        border: 1px dashed red;
+       /* border: 1px dashed red;*/
     }
     
     .app__primary-info {
-        flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
         width: 63%;
     }
     
     .app__address,
     .app__degree {
         width: 100%; ;
-        border: 1px dashed red;
+        /*border: 1px dashed red;*/
     }
 
     #city,
@@ -386,9 +431,11 @@ button {
         font-size: 1.3em;
     }
     
-    .app__city-and-country {
-        display: flex;
-        justify-content: space-between ;
+    .app__city-and-country {      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+        -ms-flex-pack: justify;
+            justify-content: space-between ;
         font-size: 1.35em;
     }
     
@@ -414,7 +461,7 @@ button {
     .app__wind-speed,
     .app__humidity {
         margin: 0;
-        border: 1px dashed red;
+        /*border: 1px dashed red;*/
     }
     
     /**********************app__forecast-section*****************/
@@ -432,24 +479,35 @@ button {
     .forecast-section__forecast:nth-of-type(5),
     .forecast-section__forecast:nth-of-type(6),
     .forecast-section__forecast:nth-of-type(7),
-    .forecast-section__forecast:nth-of-type(8) {
-        display: flex;
-        flex-direction: column;
+    .forecast-section__forecast:nth-of-type(8) {      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex;
+        -ms-flex-direction: column;
+            flex-direction: column;
         width: 13.2%;
         float: left;
         margin-left: 1%;
         padding: 0;
-        border: 2px dashed green;
+       /* border: 2px dashed green;*/
     }
     
     .forecast-section__date-and-text,
     .forecast-section__icon-and-deg{
         width: 100%;
         text-align: center;
+        display: -ms-flexbox; 
+        display: flex;
     }
     
-    .forecast-section__icon-and-deg{
+    .forecast-section__date-and-text {
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+    
+    .forecast-section__icon-and-deg{ 
+        display: -ms-flexbox; 
         display: flex;
+        -ms-flex-direction: column;
         flex-direction: column;
     }
     
@@ -463,7 +521,6 @@ button {
     
     
 }
-
 
 
 
