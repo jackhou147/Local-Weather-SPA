@@ -394,6 +394,9 @@ $(document).ready(function(){
         }
         navigator.geolocation.getCurrentPosition(success,error);
     }
+    else {
+        alert("Oops. You must be a ninja because we can't detect your location.")
+    }
 };
     sendApiRequest();
     
